@@ -1,4 +1,4 @@
-package main.scala
+package db
 
 object DbConfig {
   val dbDriverName = "org.h2.Driver"
