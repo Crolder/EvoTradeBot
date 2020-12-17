@@ -4,7 +4,7 @@ sealed abstract case class Storage private (storage: Int)
 object Storage {
     def of(storage: String): Option[Storage] = {
         storage.toIntOption match {
-            case Some(storage) => Some(new Storage(storage) {})
+            case Some(storage) if storage > 0 => Some(new Storage(storage) {})
             case _ => None
         }
     }

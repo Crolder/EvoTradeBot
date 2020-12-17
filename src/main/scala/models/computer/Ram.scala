@@ -4,7 +4,7 @@ sealed abstract case class Ram private (ram: Int)
 object Ram {
     def of(ram: String): Option[Ram] = {
         ram.toIntOption match {
-            case Some(ram) => Some(new Ram(ram) {})
+            case Some(ram) if ram > 0 => Some(new Ram(ram) {})
             case _ => None
         }
     }

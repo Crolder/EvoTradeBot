@@ -4,7 +4,7 @@ sealed abstract case class Mileage private (mileage: Int)
 object Mileage {
     def of(mileage: String): Option[Mileage] = {
         mileage.toIntOption match {
-            case Some(mileage) if mileage >= 0 & mileage <= 10000000 => Some(new Mileage(mileage) {})
+            case Some(mileage) if mileage >= 0 & mileage <= 1000000 => Some(new Mileage(mileage) {})
             case _ => None
         }
     }

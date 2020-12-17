@@ -36,6 +36,24 @@ object InputValidation {
             }
         } yield image
 
+    def provideDescription[F[_]: TelegramClient](chat: Chat)(implicit service: Service[F]): Scenario[F, Description] =
+        for {
+            _      <- Scenario.eval(chat.send("Enter product description", keyboard = Keyboard.Remove))
+            input   <- Scenario.expect(text)
+            description <- Scenario.pure[F](Description(input))
+        } yield description
+
+    def providePhoneNumber[F[_]: TelegramClient](chat: Chat)(implicit service: Service[F]): Scenario[F, PhoneNumber] =
+        for {
+            _      <- Scenario.eval(chat.send("Please enter your phone number as [+3712*******]", keyboard = Keyboard.Remove))
+            input   <- Scenario.expect(text)
+            option <- Scenario.pure[F](PhoneNumber.of(input))
+            result <- option match {
+                case Some(value) => Scenario.pure[F](value)
+                case None => Scenario.eval(chat.send("Try again")) >> providePhoneNumber(chat)
+            }
+        } yield result
+
     //Car
     def provideYear[F[_]: TelegramClient](chat: Chat)(implicit service: Service[F]): Scenario[F, Year] =
         for {
@@ -122,22 +140,4 @@ object InputValidation {
             input   <- Scenario.expect(text)
             videoCard <- Scenario.pure[F](VideoCard(input))
         } yield videoCard
-
-    def provideDescription[F[_]: TelegramClient](chat: Chat)(implicit service: Service[F]): Scenario[F, Description] =
-        for {
-            _      <- Scenario.eval(chat.send("Enter product description", keyboard = Keyboard.Remove))
-            input   <- Scenario.expect(text)
-            description <- Scenario.pure[F](Description(input))
-        } yield description
-
-    def providePhoneNumber[F[_]: TelegramClient](chat: Chat)(implicit service: Service[F]): Scenario[F, PhoneNumber] =
-        for {
-            _      <- Scenario.eval(chat.send("Please enter your phone number as [+3712*******]", keyboard = Keyboard.Remove))
-            input   <- Scenario.expect(text)
-            option <- Scenario.pure[F](PhoneNumber.of(input))
-            result <- option match {
-                case Some(value) => Scenario.pure[F](value)
-                case None => Scenario.eval(chat.send("Try again")) >> providePhoneNumber(chat)
-            }
-        } yield result
 }
