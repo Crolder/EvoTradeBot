@@ -1,6 +1,7 @@
 package models.apartment
 
 import org.scalacheck.Gen._
+import org.scalacheck.Gen
 import org.scalatest.{EitherValues, OptionValues}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
@@ -32,7 +33,7 @@ class AreaSpec extends AnyFlatSpec with OptionValues with EitherValues with Scal
     }
 
     it should "forbid being created when something besides digits provided" in {
-        forAll(alphaNumStr) { v: String =>
+        forAll(Gen.oneOf("1234.","123hg123","fff","1~","1'3")) { v: String =>
             Area.of(v) shouldBe None
         }
     }

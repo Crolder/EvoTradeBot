@@ -1,5 +1,6 @@
 package models.car
 
+import org.scalacheck.Gen
 import org.scalacheck.Gen._
 import org.scalatest.{EitherValues, OptionValues}
 import org.scalatest.flatspec.AnyFlatSpec
@@ -13,11 +14,35 @@ class YearSpec extends AnyFlatSpec with OptionValues with EitherValues with Scal
         }
     }
 
-    it should "forbid being created with years outside [ 1900 - 2021 ] range" in {
+    it should "forbid being created with year outside [ 1900 - 2021 ] range" in {
         forAll { v: Int =>
             whenever(v < 1900 || v > 2021) {
                 Year.of(v.toString) shouldBe None
             }
+        }
+    }
+    
+    it should "forbid being created with positive double provided" in {
+        forAll(posNum[Double]) { v: Double =>
+            Year.of(v.toString) shouldBe None
+        }
+    }
+
+    it should "forbid being created with negative double provided" in {
+        forAll(negNum[Double]) { v: Double =>
+            Year.of(v.toString) shouldBe None
+        }
+    }
+
+    it should "forbid being created with negative integer provided" in {
+        forAll(negNum[Int]) { v: Int =>
+            Year.of(v.toString) shouldBe None
+        }
+    }
+
+    it should "forbid being created when something besides digits provided" in {
+        forAll(Gen.oneOf("1234.","123hg123","fff","1~","1'3")) { v: String =>
+            Year.of(v) shouldBe None
         }
     }
 
