@@ -57,7 +57,7 @@ object Main extends IOApp {
         _ <- createTableComputers()
         _ <- insertCarF(Car(
             ProductId(UUID.randomUUID()),
-            UserId(123),Price.of("666.66").get
+            UserId(123),Price.of("666.123456").get
             ,Audi,Year.of("2007").get
             ,Mileage.of("120000").get
             ,Description(description)

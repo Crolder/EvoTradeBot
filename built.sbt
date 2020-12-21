@@ -2,6 +2,8 @@ name := "TradePlatform"
 
 scalaVersion := "2.13.3"
 
+mainClass in (Compile, run) := Some("main.scala.Main")
+
 val doobieVersion = "0.9.0"
 val canoeVersion = "0.5.1"
 val scalaTestVersion = "3.1.0.0-RC2"

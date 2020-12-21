@@ -11,7 +11,7 @@ object DbMappings {
     //Base mappings
     implicit val userIdMeta: Meta[UserId] = Meta[Long].timap(UserId.fromLong)(UserId.toLong)
     implicit val productIdMeta: Meta[ProductId] = Meta[String].timap(ProductId.fromString)(ProductId.toString)
-    implicit val priceMeta: Meta[Price] = Meta[Double].timap(Price.fromDouble)(Price.toDouble)
+    implicit val priceMeta: Meta[Price] = Meta[BigDecimal].timap(Price.fromDecimal)(Price.toDecimal)
     implicit val imageKeyMeta: Meta[ImageKey] = Meta[String].timap(ImageKey.fromString)(ImageKey.toString)
     implicit val descriptionMeta: Meta[Description] = Meta[String].timap(Description.fromString)(Description.toString)
     implicit val phoneNumberMeta: Meta[PhoneNumber] = Meta[String].timap(PhoneNumber.fromString)(PhoneNumber.toString)

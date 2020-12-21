@@ -27,7 +27,7 @@ class TemplatesSpec extends AnyFlatSpec with OptionValues with EitherValues with
               |
               |Description: Test description
               |
-              |Price: 123.0 €
+              |Price: 123.00 €
               |""".stripMargin
         val manualPhotoContent = PhotoContent(Existing(testImageKey), testCaption)
 
@@ -54,7 +54,7 @@ class TemplatesSpec extends AnyFlatSpec with OptionValues with EitherValues with
               |
               |Description: Test description
               |
-              |Price: 123.0 €
+              |Price: 123.13 €
               |""".stripMargin
         val manualPhotoContent = PhotoContent(Existing(testImageKey), testCaption)
 
@@ -64,7 +64,7 @@ class TemplatesSpec extends AnyFlatSpec with OptionValues with EitherValues with
             RoomAmount.of(2.toString).get,
             Floor.of(7.toString).get,
             Description("Test description"),
-            Price.of(123.00.toString).get,
+            Price.of(123.13.toString).get,
             ImageKey(testImageKey)
         )
 
@@ -82,7 +82,7 @@ class TemplatesSpec extends AnyFlatSpec with OptionValues with EitherValues with
               |
               |Description: Test description
               |
-              |Price: 654.0 €
+              |Price: 654.56 €
               |""".stripMargin
         val manualPhotoContent = PhotoContent(Existing(testImageKey), testCaption)
 
@@ -92,7 +92,7 @@ class TemplatesSpec extends AnyFlatSpec with OptionValues with EitherValues with
             VideoCard("GTX 2080"),
             Storage.of(520.toString).get,
             Description("Test description"),
-            Price.of(654.00.toString).get,
+            Price.of(654.56.toString).get,
             ImageKey(testImageKey)
         )
 

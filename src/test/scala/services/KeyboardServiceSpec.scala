@@ -24,6 +24,5 @@ class KeyboardServiceSpec extends AnyFlatSpec with OptionValues with EitherValue
                 manualButton.text shouldBe functionButton.text
             }
         }
-
     }
 }
