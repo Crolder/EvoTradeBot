@@ -7,7 +7,7 @@ import org.scalatest.{EitherValues, OptionValues}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
 import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
-import Templates._
+import utils.Templates._
 import models.apartment._
 import models.apartment.District._
 import models.base._

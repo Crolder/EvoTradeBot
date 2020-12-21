@@ -39,7 +39,7 @@ class DbServiceSpec extends AnyFunSuite with Matchers with IOChecker {
     val insert =
         sql"""
           INSERT INTO USERS VALUES (123, "John", "Black", "Snow", "+37129999999");
-           """.update.run.transact(transactor)
+           """.update
 
     val users =
         sql"""
@@ -48,5 +48,6 @@ class DbServiceSpec extends AnyFunSuite with Matchers with IOChecker {
   """.query[String]
 
     test("trivial") { check(trivial) }
+    test("insert") { check(insert)  }
     test("users") { check(users)  }
 }

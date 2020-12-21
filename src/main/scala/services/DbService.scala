@@ -5,15 +5,11 @@ import models.{Product, User}
 import cats.effect.{ContextShift, IO}
 import db.DbScenarios._
 import db.DbTransactor
+import db.DbMappings._
 import doobie.implicits._
 import models.base._
-import models.apartment._
-import models.car._
-import models.computer._
-import db.DbMappings._
 import models.user._
 
-import java.util.UUID
 import scala.concurrent.ExecutionContext
 
 trait DbService[F[_]] {
@@ -48,7 +44,7 @@ object DbService {
 
     implicit val dbService: DbService[IO] = new DbService[IO] {
         def insertUserToDb(user: User): IO[Unit] = for {
-            _ <-transactor.use(xa => insertUser(user).update.run.transact(xa))
+            _ <- transactor.use(xa => insertUser(user).update.run.transact(xa))
         } yield ()
 
         def addPhoneNumberById(id: UserId, phoneNumber: PhoneNumber): IO[Unit] = for {

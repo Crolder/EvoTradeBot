@@ -35,7 +35,7 @@ class MileageSpec extends AnyFlatSpec with OptionValues with EitherValues with S
     }
 
     it should "forbid being created when something besides digits provided" in {
-        forAll(Gen.oneOf("1234.","123hg123","fff","1~","1'3")) { v: String =>
+        forAll(Gen.oneOf("123hg123","fff","1[]","1'''''3")) { v: String =>
             Mileage.of(v) shouldBe None
         }
     }

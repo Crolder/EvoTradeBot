@@ -14,7 +14,7 @@ import canoe.api.models.Keyboard
 import canoe.api.{Scenario, TelegramClient}
 import canoe.models.Chat
 import canoe.syntax.text
-import main.scala.InputValidation._
+import utils.InputValidation._
 import services.{DbService, KeyboardService}
 
 object AttributeFilter {

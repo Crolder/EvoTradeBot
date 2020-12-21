@@ -1,16 +1,14 @@
-package main.scala
+package utils
 
-import canoe.api.{Scenario, chatApi}
-import canoe.models.{Chat, Contact, DetailedChat}
 import canoe.models.InputFile.Existing
 import canoe.models.messages.ContactMessage
 import canoe.models.outgoing.PhotoContent
-import models.apartment._
-import models.base._
-import models.car._
-import models.computer._
-import models.User
-import models.Product
+import canoe.models.{Chat, Contact, DetailedChat}
+import models.apartment.{Area, District, Floor, RoomAmount}
+import models.base.{Description, ImageKey, Price}
+import models.car.{Manufacturer, Mileage, Year}
+import models.computer.{Cpu, Ram, Storage, VideoCard}
+import models.{Product, User}
 
 object Templates {
 

@@ -33,7 +33,7 @@ class AreaSpec extends AnyFlatSpec with OptionValues with EitherValues with Scal
     }
 
     it should "forbid being created when something besides digits provided" in {
-        forAll(Gen.oneOf("1234.","123hg123","fff","1~","1'3")) { v: String =>
+        forAll(Gen.oneOf("123hg123","fff","1[]","1'''''3")) { v: String =>
             Area.of(v) shouldBe None
         }
     }
