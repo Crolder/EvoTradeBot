@@ -1,18 +1,6 @@
 package main.scala
 
-import models.Product.{Apartment, Car, Computer}
 import cats.effect.{ExitCode, IO, IOApp}
-import db.DbTransactor
-import db.DbScenarios._
-import doobie.implicits._
-import models.{Product, User}
-import models.base.{Description, ImageKey, Price, ProductId, UserId}
-import models.car.Manufacturer.Audi
-import models.car.{Mileage, Year}
-import models.user.PhoneNumber
-import main.scala.Presentation
-
-import java.util.UUID
 
 object Main extends IOApp {
 

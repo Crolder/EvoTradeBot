@@ -30,8 +30,6 @@ object DisplayContent {
         } yield ()
 
     def displayProductOptions[F[_] : TelegramClient](chat: Chat)(implicit service: DbService[F], objectFactory: ObjectFactory[F]): Scenario[F, Unit] = {
-        val filterKeyboard = KeyboardService.createKeyboard(true, "Yes", "No")
-
         for {
             _ <- Scenario.eval(chat.send(s"Which products", keyboard = KeyboardService.createKeyboard(true, "All", "Cars", "Apartments", "Computers", "My", "Cancel")))
             m <- Scenario.expect(text)
@@ -54,7 +52,10 @@ object DisplayContent {
                 } yield ()
                 case "My" => for {
                     products <- Scenario.eval(service.getProductsByUserId(UserId(chat.id)))
-                    _ <- if (products.nonEmpty) displayProduct(chat, products, 0) else for {
+                    _ <- if (products.nonEmpty) for {
+                            _ <- Scenario.eval(chat.send(s"Amount of my products: ${products.size}"))
+                            _ <- displayProduct(chat, products, 0)
+                    } yield () else for {
                         _ <- Scenario.eval(chat.send("You have no products to display"))
                         _ <- displayProductOptions(chat)
                     } yield ()

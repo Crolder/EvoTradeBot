@@ -35,6 +35,10 @@ object BotActions {
                     _ <- Scenario.eval(chat.send(s"Amount of products: ${products.size}"))
                     _ <- displayProduct(chat, products, 0)
                 } yield ()
+                case _ => for {
+                    _ <- Scenario.eval(chat.send(s"Incorrect input!"))
+                    _ <- displayProductOptions(chat)
+                } yield ()
             }
         } yield ()
     }
@@ -127,7 +131,7 @@ object BotActions {
                     _ <- Scenario.eval(chat.send(content = "Phone number added successfully!")) >> displayAction(chat)
                 } yield ()
                 case "Back" => displayAction(chat)
-                case _ => displayAction(chat)
+                case _ => Scenario.eval(chat.send(content = "Incorrect input!")) >> displayAction(chat)
             }
         } yield ()
     }

@@ -20,4 +20,3 @@ libraryDependencies ++= Seq(
     "io.chrisdavenport" %% "cats-scalacheck" % catsScalacheckVersion % Test,
     "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestVersion % Test,
 )
-
